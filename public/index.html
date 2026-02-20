@@ -25,7 +25,12 @@
 
       // 1. Hacemos la petición a tu función que "descarga/procesa" el video
       const respuestaServidor = await fetch('/pruebas/descargar', {
-        method: 'POST'
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          // Enviamos un objeto con la URL que escribió el usuario
+          link: document.getElementById('link').value,
+        })
       });
       const datos = await respuestaServidor.json();
 
@@ -35,7 +40,7 @@
       // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
       // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
       // Esto NO recarga la página, pero hace que salte la ventana de "Guardar archivo"
-      window.location.href = '/pruebas/obtener-archivo';
+      window.location.href = `/pruebas/obtener-archivo?path=${encodeURIComponent(datos.path)}&name=${encodeURIComponent(datos.name)}`;
 
     } catch (error) {
       parrafoRespuesta.innerText = '❌ Error de conexión.';
