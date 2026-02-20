@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi App Estructurada</title>
+</head>
+<body>
+<h1>Comunicación con Express Generator</h1>
+
+<button id="botonPedir">Pedir datos a la ruta /pruebas</button>
+<p id="respuesta">Esperando...</p>
+
+<script>
+  const boton = document.getElementById('botonPedir');
+  const parrafoRespuesta = document.getElementById('respuesta');
+
+  boton.addEventListener('click', async () => {
+    try {
+      parrafoRespuesta.innerText = '⏳ Procesando el video en el servidor...';
+      boton.disabled = true;
+
+      // 1. Hacemos la petición a tu función que "descarga/procesa" el video
+      const respuestaServidor = await fetch('/pruebas/descargar', {
+        method: 'POST'
+      });
+      const datos = await respuestaServidor.json();
+
+      // 2. El servidor ya terminó. Avisamos al usuario.
+      parrafoRespuesta.innerText = '✅ ' + datos.mensaje + ' ¡Iniciando transferencia a tu PC!';
+
+      // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
+      // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
+      // Esto NO recarga la página, pero hace que salte la ventana de "Guardar archivo"
+      window.location.href = '/pruebas/obtener-archivo';
+
+    } catch (error) {
+      parrafoRespuesta.innerText = '❌ Error de conexión.';
+      console.error(error);
+    } finally {
+      boton.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
