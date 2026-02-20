@@ -15,7 +15,7 @@ a {
   font-size: 6em;
   text-align: center;
   color: white;
-  margin-inline: 4em;
+
 }
 
 #link-section
@@ -26,7 +26,7 @@ a {
 
 #link
 {
-  padding-inline: 6em;
+  padding-right: 12em;
   margin-inline: 1em;
 }
 
