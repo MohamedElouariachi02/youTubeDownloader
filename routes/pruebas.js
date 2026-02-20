@@ -14,11 +14,13 @@ async function descarga(url) {
     // Definimos la ruta exacta donde se guardará el archivo en tu servidor
     var rutaDestino = path.join(__dirname, '../source');
     rutaDestino = path.join(rutaDestino, nombreArchivo);
+    const rutaCookie = path.join(__dirname, '../cookie.txt');
 
     // Retornamos la promesa para que el servidor pueda "esperar" a que termine
     await ytDlp(url, {
         output: rutaDestino,
         format: 'bestaudio/best[height<=720]',
+        cookies: rutaCookie,
         mergeOutputFormat: 'mp4'
     })
     return [rutaDestino, nombreArchivo]
