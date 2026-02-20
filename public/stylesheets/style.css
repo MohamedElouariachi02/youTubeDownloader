@@ -1,8 +1,45 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: black;
 }
 
 a {
   color: #00B7FF;
+}
+
+#logo
+{
+  background-color: red;
+  border-radius: 0.3em;
+  font-size: 6em;
+  text-align: center;
+  color: white;
+  margin-inline: 4em;
+}
+
+#link-section
+{
+  display: flex;
+  justify-content: center;
+}
+
+#link
+{
+  padding-inline: 6em;
+  margin-inline: 1em;
+}
+
+#botonPedir
+{
+  background-color: red;
+  color: #ffffff;
+  border-radius: 0.5em;
+  border-style: unset;
+  font-size: 1em;
+}
+#respuesta
+{
+  padding-inline: 1em;
+  color: white;
 }

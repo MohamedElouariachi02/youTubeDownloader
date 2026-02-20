@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Mi App Estructurada</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
-<h1>Comunicación con Express Generator</h1>
+<h1 id="logo">YouTube Downloader</h1>
+<section id="link-section">
+  <input type="url" id="link">
+  <button id="botonPedir">Descargar</button>
+  <p id="respuesta"></p>
+</section>
 
-<button id="botonPedir">Pedir datos a la ruta /pruebas</button>
-<p id="respuesta">Esperando...</p>
 
 <script>
   const boton = document.getElementById('botonPedir');
