@@ -20,7 +20,7 @@
 
   boton.addEventListener('click', async () => {
     try {
-      parrafoRespuesta.innerText = '⏳ Procesando el video en el servidor...';
+      parrafoRespuesta.innerText = '⏳';
       boton.disabled = true;
 
       // 1. Hacemos la petición a tu función que "descarga/procesa" el video
@@ -30,7 +30,7 @@
       const datos = await respuestaServidor.json();
 
       // 2. El servidor ya terminó. Avisamos al usuario.
-      parrafoRespuesta.innerText = '✅ ' + datos.mensaje + ' ¡Iniciando transferencia a tu PC!';
+      parrafoRespuesta.innerText = '✅ ';
 
       // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
       // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
