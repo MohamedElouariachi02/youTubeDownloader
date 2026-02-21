@@ -8,7 +8,7 @@ async function descarga(url) {
     console.log('Iniciando descarga con yt-dlp...');
     const rutaCookie = path.join(__dirname, '../cookie.txt');
     const info = await ytDlp(url, { dumpSingleJson: true, cookies: rutaCookie, });
-    const title = info.title
+    const title = info.title.replace(/[^a-zA-Z0-9 _-]/g, "");
     const ext = 'mp4'
     const nombreArchivo = `${title}.${ext}`;
 
