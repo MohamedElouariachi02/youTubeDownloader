@@ -26,7 +26,7 @@ a {
 
 #link
 {
-  width: 100%;
+  width: 80%;
   margin-inline: 1em;
   font-size: 2em;
 
@@ -34,11 +34,12 @@ a {
 
 #botonPedir
 {
+  width: 20%;
   background-color: red;
   color: #ffffff;
   border-radius: 0.5em;
   border-style: unset;
-  font-size: 1em;
+  font-size: 1.5em;
 }
 #respuesta
 {
