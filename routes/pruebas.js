@@ -8,7 +8,12 @@ async function descarga(url) {
     try {
         console.log('Iniciando descarga con yt-dlp...');
         const rutaCookie = path.join(__dirname, '../cookie.txt');
-        const info = await ytDlp(url, { dumpSingleJson: true, cookies: rutaCookie, });
+        const opcionesComunes = {
+            cookies: rutaCookie,
+            jsRuntimes: 'node', // Le decimos que use Node.js para resolver los acertijos de YouTube
+            extractorArgs: 'youtube:player_client=android' // Nos hacemos pasar por la app de Android para evitar el bloqueo de bots
+        };
+        const info = await ytDlp(url, { dumpSingleJson: true, cookies: rutaCookie, opcionesComunes});
         const title = info.title.replace(/[^a-zA-Z0-9 _-]/g, "");
         const ext = 'mp4'
         const nombreArchivo = `${title}.${ext}`;
@@ -23,7 +28,8 @@ async function descarga(url) {
             output: rutaDestino,
             format: 'bestaudio/best[height<=720]',
             cookies: rutaCookie,
-            mergeOutputFormat: 'mp4'
+            mergeOutputFormat: 'mp4',
+            opcionesComunes
         })
         return [rutaDestino, nombreArchivo]
     }
