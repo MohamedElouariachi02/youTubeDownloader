@@ -6,15 +6,16 @@ var router = express.Router();
 // 1. Función asíncrona para descargar el video
 async function descarga(url) {
     console.log('Iniciando descarga con yt-dlp...');
-    const info = await ytDlp(url, { dumpSingleJson: true });
+    const rutaCookie = path.join(__dirname, '../cookie.txt');
+    const info = await ytDlp(url, { dumpSingleJson: true, cookies: rutaCookie, });
     const title = info.title
-    const ext = 'mp3'
+    const ext = 'mp4'
     const nombreArchivo = `${title}.${ext}`;
 
     // Definimos la ruta exacta donde se guardará el archivo en tu servidor
     var rutaDestino = path.join(__dirname, '../source');
     rutaDestino = path.join(rutaDestino, nombreArchivo);
-    const rutaCookie = path.join(__dirname, '../cookie.txt');
+
 
     // Retornamos la promesa para que el servidor pueda "esperar" a que termine
     await ytDlp(url, {
@@ -42,7 +43,7 @@ router.post('/descargar', async function(req, res, next) {
         });
     } catch (error) {
         console.error('Error al descargar:', error);
-        res.status(500).json({ mensaje: "Hubo un error al descargar el video.", path: path});
+        res.status(500).json({ mensaje: "Hubo un error al descargar el video."});
     }
 });
 
