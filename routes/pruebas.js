@@ -8,12 +8,7 @@ async function descarga(url) {
     try {
         console.log('Iniciando descarga con yt-dlp...');
         const rutaCookie = path.join(__dirname, '../cookie.txt');
-        const opcionesComunes = {
-            cookies: rutaCookie,
-            jsRuntimes: 'node', // Le decimos que use Node.js para resolver los acertijos de YouTube
-            extractorArgs: 'youtube:player_client=android' // Nos hacemos pasar por la app de Android para evitar el bloqueo de bots
-        };
-        const info = await ytDlp(url, { dumpSingleJson: true, cookies: rutaCookie, opcionesComunes});
+        const info = await ytDlp(url, { dumpSingleJson: true, cookies: rutaCookie, jsRuntimes: 'node', extractorArgs: 'youtube:player_client=android'});
         const title = info.title.replace(/[^a-zA-Z0-9 _-]/g, "");
         const ext = 'mp4'
         const nombreArchivo = `${title}.${ext}`;
@@ -29,13 +24,14 @@ async function descarga(url) {
             format: 'bestaudio/best[height<=720]',
             cookies: rutaCookie,
             mergeOutputFormat: 'mp4',
-            opcionesComunes
+            jsRuntimes: 'node',
+            extractorArgs: 'youtube:player_client=android'
         })
         return [rutaDestino, nombreArchivo]
     }
     catch (error) {
         console.error("Url no valida");
-        console.log(error)
+        console.log("Comando exacto que falló:", error.command); // Esto nos chivará si lo hizo bien
         return [undefined, undefined]
     }
 
