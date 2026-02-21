@@ -27,10 +27,17 @@ a {
 #link
 {
   width: 80%;
-  margin-inline: 1em;
+  margin-inline: 0.2em;
   font-size: 3em;
   height: 2em;
 
+}
+
+#formato-descarga
+{
+  margin-inline: 0.2em;
+  background-color: #ffffff;
+  text-align: center;
 }
 
 #botonPedir
@@ -41,6 +48,7 @@ a {
   border-radius: 0.5em;
   border-style: unset;
   font-size: 3em;
+  margin-inline: 0.2em;
 }
 #respuesta
 {

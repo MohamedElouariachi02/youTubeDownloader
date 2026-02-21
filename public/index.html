@@ -10,9 +10,15 @@
 <div>
   <section id="link-section">
     <input type="url" id="link" placeholder="Link">
+    <select id="formato-descarga">
+      <option value="" disabled selected>formato</option>
+      <option value="mp4">MP4</option>
+      <option value="mp3">MP3</option>
+    </select>
     <button id="botonPedir">Descargar</button>
   </section>
   <p id="respuesta"></p>
+
 </div>
 
 
@@ -28,6 +34,11 @@
 
       if (document.getElementById('link').value)
       {
+        if (document.getElementById('formato-descarga').value === "")
+        {
+          parrafoRespuesta.innerText = 'Selecciona un formato mp4 o mp3';
+          return
+        }
         // 1. Hacemos la petición a tu función que "descarga/procesa" el video
         const respuestaServidor = await fetch('/pruebas/descargar', {
           method: 'POST',
@@ -40,15 +51,24 @@
         const datos = await respuestaServidor.json();
         // 2. El servidor ya terminó. Avisamos al usuario.
         parrafoRespuesta.innerText = '✅';
+        document.getElementById('link').value = ""
 
         // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
         // 3. LA MAGIA: Le decimos al navegador que vaya a la ruta de descarga.
         // Esto NO recarga la página, pero hace que salte la ventana de "Guardar archivo"
-        window.location.href = `/pruebas/obtener-archivo?path=${encodeURIComponent(datos.path)}&name=${encodeURIComponent(datos.name)}`;
+        if (datos.estado === "completado")
+        {
+          window.location.href = `/pruebas/obtener-archivo?path=${encodeURIComponent(datos.path)}&name=${encodeURIComponent(datos.name)}`;
+          parrafoRespuesta.innerText = 'Escribe un link';
+        }
+        else
+        {
+          parrafoRespuesta.innerText = 'URL no valida';
+        }
       }
       else
       {
-        parrafoRespuesta.innerText = 'Escribe un link';
+        parrafoRespuesta.innerText = 'URL no valida';
       }
 
 
