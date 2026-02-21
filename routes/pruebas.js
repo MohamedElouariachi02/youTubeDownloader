@@ -29,6 +29,7 @@ async function descarga(url) {
     }
     catch (error) {
         console.error("Url no valida");
+        console.log(error)
         return [undefined, undefined]
     }
 
